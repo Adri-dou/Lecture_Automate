@@ -1,4 +1,8 @@
 
+# Note : pour le moment on ne sait lire que des fichiers textes complets,
+# cela risque de ne pas marcher avec des automates comme le # 1
+
+
 def demande_utilisateur():
     """
     Lit l'automate que l'utilisateur souhaite à partir d'un fichier texte

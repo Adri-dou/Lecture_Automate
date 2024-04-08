@@ -30,16 +30,20 @@ def afficher_automate(automate, CASE):
 
         # on va maintenant afficher les transitions en fonction de l'alphabet
         for lettre in range(0, automate["nb_symboles"]):
+
             etats_suivants = ""
             for transition in automate["transitions"]:
+
+                # on va vérifier s'il existe une transition entre l'état courant
+                # et un autre état avec la lettre courante
                 if etat == int(transition[0]) and chr(97 + lettre) == transition[1]:
-                    #print(f"\netat : {etat}, lettre : {lettre}, transition : {transition}")
 
                     if len(etats_suivants) == 0:
                         etats_suivants += transition[2]
-                    else:
+                    else:  # on ajoute une virgule s'il y a plusieurs états à afficher
                         etats_suivants += "," + transition[2]
 
+            # on finalise l'affichage de la case
             if len(etats_suivants) == 0:
                 print(f"{"-":^{CASE}}", end="|")
             else:
