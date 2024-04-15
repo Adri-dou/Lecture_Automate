@@ -9,7 +9,7 @@ def demande_utilisateur() -> dict:
     user_input = input("Quel automate souhaitez-vous charger ?")
 
     # on ouvre le fichier en lecture
-    with open(f"G5-{user_input}.txt", "r") as f:
+    with open(f"./automates/G5-{user_input}.txt", "r") as f:
         lignes = f.readlines()
 
     # Création du dictionnaire de l'automate
