@@ -34,7 +34,7 @@ def afficher_automate(automate: dict, CASE: int) -> None:
 
             etats_suivants = ""
             if chr(97+lettre) in automate["etats"][etat]:
-                print(f"{",".join(str(nb) for nb in automate["etats"][etat][chr(97+lettre)]):^{CASE}}", end="|")
+                print(f"{",".join(nb for nb in automate["etats"][etat][chr(97+lettre)]):^{CASE}}", end="|")
 
             else:
                 print(f"{"-":^{CASE}}", end="|")
