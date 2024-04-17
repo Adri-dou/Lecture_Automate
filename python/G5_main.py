@@ -16,3 +16,5 @@ if __name__ == '__main__':
 
     mon2eautomate = stdrd.standardisation(mon_automate)
     show.afficher_automate(mon2eautomate, TAILLE_CASE)
+
+    show.sauvegarde_csv(mon2eautomate)
