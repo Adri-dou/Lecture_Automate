@@ -1,12 +1,12 @@
 
 
-def demande_utilisateur() -> dict:
+def demande_utilisateur(choix : int) -> dict:
     """
     Lit l'automate que l'utilisateur souhaite à partir d'un fichier texte
     et renvoie un dictionnaire représentant l'automate.
     """
-
-    user_input = input("Quel automate souhaitez-vous charger ?")
+    user_input = choix
+    #user_input = input("Quel automate souhaitez-vous charger ?")
     if len(user_input) < 2:
         user_input = "0" + user_input
 
