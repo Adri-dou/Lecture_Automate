@@ -4,12 +4,15 @@ def est_deterministe(AF: dict) -> bool:
 
     # il ne l'est pas, s'il n'a pas qu'une entrée
     if len(AF["etats_initiaux"]) != 1:
+        print("L'automate n'a pas qu'une unique entrée, il n'est pas déterministe")
         return False
 
     # un état ne doit pas non plus engendrer plus d'une transition par la même lettre
     for etat in AF["etats"]:
         for lettre in AF["etats"][etat]:
             if len(AF["etats"][etat][lettre]) > 1:
+                print(f"L'automate n'est pas déterministe, l'état {etat} "
+                      f"mène vers les états {AF['etats'][etat][lettre]} depuis la lettre {lettre}")
                 return False
 
     # si les tests on été passés, l'automate est déterministe
