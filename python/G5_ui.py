@@ -49,7 +49,7 @@ def demande_utilisateur(choix : int) -> dict:
             nouvel_automate["etats"][transition[0]][transition[1]].append(transition[2])
             nouvel_automate["etats"][transition[0]][transition[1]].sort()  # on trie pour que ce soit plus propre à l'affichage
 
-    print(nouvel_automate)
+    #print(nouvel_automate)
 
     return nouvel_automate
 

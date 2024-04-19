@@ -27,14 +27,14 @@ def determinisation(AF: dict) -> dict:
         "nb_symboles": AF["nb_symboles"],
         "nb_etats": 1,
         "nb_etats_initiaux": 1,
-        "etats_initiaux": ["-".join(AF["etats_initiaux"])],
+        "etats_initiaux": [".".join(AF["etats_initiaux"])],
         "nb_etats_terminaux": 0,  # on remplira ce champ plus tard
         "etats_terminaux": [],  # pareil ici
         "nb_transitions": 0,  # idem
         "etats": {},
     }
 
-    nouveaux_etats = ["-".join(AF["etats_initiaux"])]
+    nouveaux_etats = [".".join(AF["etats_initiaux"])]
 
     while len(nouveaux_etats) > 0:
         nouvel_etat = nouveaux_etats.pop(0)
@@ -47,14 +47,14 @@ def determinisation(AF: dict) -> dict:
 
             nouvel_etat_destination = ""
             # on retrouve les anciens états d'origine du nouvel état
-            for etat in nouvel_etat.split("-"):
+            for etat in nouvel_etat.split("."):
 
                 if etat in AF["etats_terminaux"] and nouvel_etat not in AFD["etats_terminaux"]:
                     AFD["etats_terminaux"].append(nouvel_etat)
                     AFD["nb_etats_terminaux"] += 1
 
                 if lettre in AF["etats"][etat]:
-                    nouvel_etat_destination += "-".join(AF["etats"][etat][lettre]) + "-"
+                    nouvel_etat_destination += ".".join(AF["etats"][etat][lettre]) + "."
 
             if nouvel_etat_destination[:-1] != "":
                 AFD["etats"][nouvel_etat][lettre] = [nouvel_etat_destination[:-1]]
