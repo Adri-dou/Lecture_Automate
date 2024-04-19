@@ -1,20 +1,17 @@
 
-import G5_ui as ui
-import G5_affichage_sauvegarde as show
-import G5_standardisation as stdrd
+from G5_interface import main
 
 
-TAILLE_CASE = 5  # Constante qui va définir la largeur des cases du tableau d'affichage
+"""
+Vous êtes ici dans le fichier de lancement du projet d'aotomates finis,
+Réalisé par :
+    - Antoine JARMOSZKO
+    - Adrian MONTEIRO
+    - Matthew THIRIOT-LESNES
+    - Shiyu HU
+"""
 
 
 if __name__ == '__main__':
 
-    # Petite séquence de tests
-    mon_automate = ui.demande_utilisateur()
-    show.afficher_automate(mon_automate, TAILLE_CASE)
-    print(stdrd.est_standard(mon_automate))
-
-    mon2eautomate = stdrd.standardisation(mon_automate)
-    show.afficher_automate(mon2eautomate, TAILLE_CASE)
-
-    show.sauvegarde_csv(mon2eautomate)
+    main()

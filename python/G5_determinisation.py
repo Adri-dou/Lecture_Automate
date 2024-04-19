@@ -37,29 +37,32 @@ def determinisation(AF: dict) -> dict:
     nouveaux_etats = [".".join(AF["etats_initiaux"])]
 
     while len(nouveaux_etats) > 0:
-        nouvel_etat = nouveaux_etats.pop(0)
+        nouvel_etat_AFD = nouveaux_etats.pop(0)
 
-        AFD["etats"][nouvel_etat] = {}
+        AFD["etats"][nouvel_etat_AFD] = {}
 
         # on parcourt tout l'alphabet de l'automate
         for i in range(AF["nb_symboles"]):
             lettre = chr(97 + i)
 
-            nouvel_etat_destination = ""
+            nouvel_etat_destination = []
             # on retrouve les anciens états d'origine du nouvel état
-            for etat in nouvel_etat.split("."):
+            for etat in nouvel_etat_AFD.split("."):
 
                 # si au moins un des états d'otrigine était une sortie, celui-ci sera une sortie
-                if etat in AF["etats_terminaux"] and nouvel_etat not in AFD["etats_terminaux"]:
-                    AFD["etats_terminaux"].append(nouvel_etat)
+                if etat in AF["etats_terminaux"] and nouvel_etat_AFD not in AFD["etats_terminaux"]:
+                    AFD["etats_terminaux"].append(nouvel_etat_AFD)
                     AFD["nb_etats_terminaux"] += 1
 
                 if lettre in AF["etats"][etat]:
-                    nouvel_etat_destination += ".".join(AF["etats"][etat][lettre]) + "."
+                    for arrivee in AF["etats"][etat][lettre]:
+                        if arrivee not in nouvel_etat_destination:
+                            nouvel_etat_destination += arrivee
 
-            if nouvel_etat_destination[:-1] != "":
-                AFD["etats"][nouvel_etat][lettre] = [nouvel_etat_destination[:-1]]
-                nouveaux_etats.append(nouvel_etat_destination[:-1])
+            if nouvel_etat_destination != []:
+                nouvel_etat_destination.sort()
+                AFD["etats"][nouvel_etat_AFD][lettre] = [".".join(nouvel_etat_destination)]
+                nouveaux_etats.append(".".join(nouvel_etat_destination))
                 AFD["nb_transitions"] += 1
 
         # on nettoie la liste pour être sûr qu'il ne reste que des nouveaux états
@@ -67,6 +70,7 @@ def determinisation(AF: dict) -> dict:
         while i < len(nouveaux_etats):
             if nouveaux_etats[i] in AFD["etats"]:
                 del nouveaux_etats[i]
-            i += 1
+            else:
+                i += 1
 
     return AFD

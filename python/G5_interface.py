@@ -5,8 +5,7 @@ import G5_completion as comp
 import G5_reconnaissance as reco
 import G5_determinisation as deter
 
-TAILLE_CASE = 5  # Constante qui va définir la largeur des cases du tableau d'affichage
-i =1
+
 def main():
     while True:
         choix = input("Quel automate souhaitez-vous charger ? (Entrez 'q' pour quitter) ")
@@ -17,9 +16,12 @@ def main():
         try:
             automate = ui.demande_utilisateur(choix)
             show.sauvegarde_csv(automate)
-            while i==1 :
-                show.afficher_automate(automate, TAILLE_CASE)
-                print("\n\tInformation :\nStandardisé :",stdrd.est_standard(automate),"\nDeterminisé : ",deter.est_deterministe(automate),"\nComplet :", comp.est_complet(automate),"\n")
+            while True :
+                show.afficher_automate(automate)
+                print("\n\tInformation :"
+                      "\nStandardisé :",stdrd.est_standard(automate),
+                      "\nDeterminisé : ", deter.est_deterministe(automate),
+                      "\nComplet :", comp.est_complet(automate), "\n")
                 
                 # Demander à l'utilisateur quelle action il souhaite effectuer
                 action = input("Que voulez-vous faire ? (s = standardiser, c = vérifier la complétude, r = reconnaissance de mot, q = quitter) ").lower()

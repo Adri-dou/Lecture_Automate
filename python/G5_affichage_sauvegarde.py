@@ -1,13 +1,18 @@
 import csv
 
 
-def afficher_automate(automate: dict, CASE: int) -> None:
+def afficher_automate(automate: dict) -> None:
     """
     Affiche les informations d'un automate dans la console.
     """
 
+    CASE = 0
+    for etat in automate["etats"]:
+        if len(etat) > CASE-2:
+            CASE = len(etat) + 2
+
     # Pour la première ligne, on affiche l'alphabet uniquement
-    print(12*" ", end='')
+    print(6*" " + (CASE+1)*" ", end='')
     for lettre in range(0, automate["nb_symboles"]):
 
         # pour avoir la lettre, on part du code ASCII 97 (le a minuscule)
@@ -29,7 +34,7 @@ def afficher_automate(automate: dict, CASE: int) -> None:
             print(5*" ", end="|")
 
         # on affiche ensuite l'état en lui-même
-        print(f"{etat:^5}", end="|")
+        print(f"{etat:^{CASE}}", end="|")
 
         # on va maintenant afficher les transitions en fonction de l'alphabet
         for lettre in range(0, automate["nb_symboles"]):

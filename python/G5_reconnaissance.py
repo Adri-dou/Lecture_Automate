@@ -1,3 +1,4 @@
+
 def est_reconnu(langage: str, automate: dict) -> bool:
     """
     Vérifie si le langage donné est reconnu par l'automate spécifié.
@@ -28,6 +29,7 @@ def lire_mot():
     """
     mot = input("Entrez un mot (ou 'fin' pour arrêter) : ")
     return mot
+
 
 def reconnaitre_mot(mot, automate):
     """

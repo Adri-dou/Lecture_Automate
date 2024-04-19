@@ -1,6 +1,6 @@
 
 
-def demande_utilisateur(choix : int) -> dict:
+def demande_utilisateur(choix: str) -> dict:
     """
     Lit l'automate que l'utilisateur souhaite à partir d'un fichier texte
     et renvoie un dictionnaire représentant l'automate.
