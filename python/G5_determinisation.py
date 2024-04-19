@@ -49,6 +49,7 @@ def determinisation(AF: dict) -> dict:
             # on retrouve les anciens états d'origine du nouvel état
             for etat in nouvel_etat.split("."):
 
+                # si au moins un des états d'otrigine était une sortie, celui-ci sera une sortie
                 if etat in AF["etats_terminaux"] and nouvel_etat not in AFD["etats_terminaux"]:
                     AFD["etats_terminaux"].append(nouvel_etat)
                     AFD["nb_etats_terminaux"] += 1
@@ -62,9 +63,10 @@ def determinisation(AF: dict) -> dict:
                 AFD["nb_transitions"] += 1
 
         # on nettoie la liste pour être sûr qu'il ne reste que des nouveaux états
-        for etat in nouveaux_etats:
-            if etat in AFD["etats"]:
-                for i in range(nouveaux_etats.count(etat)):
-                    nouveaux_etats.remove(etat)
+        i = 0
+        while i < len(nouveaux_etats):
+            if nouveaux_etats[i] in AFD["etats"]:
+                del nouveaux_etats[i]
+            i += 1
 
     return AFD
