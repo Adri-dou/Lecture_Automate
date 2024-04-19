@@ -22,9 +22,7 @@ def est_deterministe(AF: dict) -> bool:
 def determinisation(AF: dict) -> dict:
     """Renvoie un automate déterministe à partir de l'automate en paramètre"""
 
-    if est_deterministe(AF):
-        print("L'automate est déjà déterministe")
-        return AF
+    
 
     AFD = {
         "nb_symboles": AF["nb_symboles"],
