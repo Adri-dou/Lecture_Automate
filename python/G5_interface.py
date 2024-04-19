@@ -36,9 +36,17 @@ def main():
                         
                 elif action == 'c':
                     if not comp.est_complet(automate):
-                        automate = comp.completer_transitions_manquantes(automate)
-                        print("L'automate a été complété.")
-                        show.sauvegarde_csv(automate)
+                        manquants = comp.trouver_manquants(automate)
+                        for manquant in manquants:
+                            print(f"Il manque une transition pour l'état {manquant[0]} et le symbole {manquant[1]}.")
+                        choix_completion = input("\n\tVoulez vous compléter l'automate ? (o/n) :")
+                        if choix_completion.lower() == 'o':
+                            automate = comp.completer_transitions_manquantes(automate)
+                            print("L'automate a été complété.")
+                            show.sauvegarde_csv(automate)
+                        else :
+                            print("L'automate na pas été complété.")
+                        
                     else:
                         print("L'automate est déjà complet.")
                 
