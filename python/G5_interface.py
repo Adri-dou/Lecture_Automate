@@ -8,15 +8,23 @@ import G5_complementarisation as comple
 
 
 def main():
-    while True:
+    """
+    Fonction principale de notre projet, elle contient la boucle générale du programme
+    """
+
+    while True:  # première boucle infinie qui va permettre à l'utilisateur de faire son choix d'automate
         choix = input("Quel automate souhaitez-vous charger ? (Entrez 'q' pour quitter) ")
         if choix.lower() == 'q':
             print("Au revoir !\n")
             break
 
+        # on teste si l'automate est trouvé
         try:
-            automate = demande_utilisateur(choix)
+            # on va créer un automate en lisant le txt du choix de l'utilisateur, puis le sauvegarder
+            automate = lecture_automate(choix)
             show.sauvegarde_csv(automate)
+
+            # 2e boucle infinie pour le choix des actions
             while True:
                 show.afficher_automate(automate)
                 print("\n\tInformations :"
@@ -37,22 +45,6 @@ def main():
                         show.sauvegarde_csv(automate)
                     else:
                         print("L'automate est déjà standard")
-                        
-                elif action == 'c':
-                    if not comp.est_complet(automate):
-                        manquants = comp.trouver_manquants(automate)
-                        for manquant in manquants:
-                            print(f"Il manque une transition pour l'état {manquant[0]} et le symbole {manquant[1]}")
-                        choix_completion = input("\n\tVoulez vous compléter l'automate ? (o/n) :")
-                        if choix_completion.lower() == 'o':
-                            automate = comp.completer_transitions_manquantes(automate)
-                            print("L'automate a été complété")
-                            show.sauvegarde_csv(automate)
-                        else:
-                            print("L'automate na pas été complété")
-                        
-                    else:
-                        print("L'automate est déjà complet")
                 
                 elif action == 'd':
                     if not deter.est_deterministe(automate):
@@ -64,6 +56,26 @@ def main():
                             print("L'automate n'a pas été déterminisé")
                     else:
                         print("L'automate est déjà deterministe")
+
+                elif action == 'c':  # pour le compléter, l'automate doit d'abord être déterministe
+                    if not deter.est_deterministe(automate):
+                        automate = deter.determinisation(automate)
+                        print("L'automate a été determinisé pour pouvoir être complété")
+                        show.sauvegarde_csv(automate)
+                    if not comp.est_complet(automate):
+                        manquants = comp.trouver_manquants(automate)
+                        for manquant in manquants:
+                            print(f"Il manque une transition pour l'état {manquant[0]} et le symbole {manquant[1]}")
+
+                        if input("\n\tVoulez vous compléter l'automate ? (o/n) :").lower() == 'o':
+                            automate = comp.completer_transitions_manquantes(automate)
+                            print("L'automate a été complété")
+                            show.sauvegarde_csv(automate)
+                        else:
+                            print("L'automate na pas été complété")
+
+                    else:
+                        print("L'automate est déjà complet")
                         
                 elif action == 'r':
                     while True:
@@ -71,9 +83,9 @@ def main():
                         if mot == "fin":
                             break  # Arrêter si l'utilisateur entre "fin"
                         resultat = reco.reconnaitre_mot(mot, automate)  
-                        print("Le mot", mot, "appartient-il au langage de l'automate ? :", resultat)
+                        print("Le mot '" + mot + "' appartient-il au langage de l'automate ? :", resultat)
 
-                elif action == 'k':
+                elif action == 'k':  # un automate doit être au moins déterministe et complet
                     if deter.est_deterministe(automate) and comp.est_complet(automate):
                         comple.complementarisation(automate)
                     
@@ -83,20 +95,19 @@ def main():
                     
                 else:
                     print("Action non reconnue. Veuillez entrer 's', 'd', 'c', 'r' ou 'q'.\n")
-                    
+
+        # si l'automate n'est pas trouvé on le fait remarquer à l'utilisateur, il pourra refaire un choix
         except FileNotFoundError:
             print("Fichier non trouvé. Veuillez entrer un numéro d'automate valide.\n")
 
 
-
-
-def demande_utilisateur(choix: str) -> dict:
+def lecture_automate(choix: str) -> dict:
     """
     Lit l'automate que l'utilisateur souhaite à partir d'un fichier texte
     et renvoie un dictionnaire représentant l'automate.
     """
     user_input = choix
-    #user_input = input("Quel automate souhaitez-vous charger ?")
+
     if len(user_input) < 2:
         user_input = "0" + user_input
 

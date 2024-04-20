@@ -42,7 +42,7 @@ def determinisation(AF: dict) -> dict:
 
         AFD["etats"][nouvel_etat_AFD] = {}
 
-        # on parcourt tout l'alphabet de l'automate
+        # on parcourt tout l'alphabet de l'automate pour chaque nouvel état ajouté
         for i in range(AF["nb_symboles"]):
             lettre = chr(97 + i)
 
@@ -55,11 +55,13 @@ def determinisation(AF: dict) -> dict:
                     AFD["etats_terminaux"].append(nouvel_etat_AFD)
                     AFD["nb_etats_terminaux"] += 1
 
+                # s'il existe des transitions dans les états d'origine, on les concataine dans le nouvel état
                 if lettre in AF["etats"][etat]:
                     for arrivee in AF["etats"][etat][lettre]:
                         if arrivee not in nouvel_etat_destination:
                             nouvel_etat_destination += arrivee
 
+            # une fois le nouvel état créé on l'ajout au bout de la transition et dans la liste des états à ajouter
             if nouvel_etat_destination != []:
                 nouvel_etat_destination.sort()
                 AFD["etats"][nouvel_etat_AFD][lettre] = [".".join(nouvel_etat_destination)]

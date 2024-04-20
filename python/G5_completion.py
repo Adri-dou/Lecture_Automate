@@ -1,3 +1,4 @@
+
 def est_complet(AF: dict) -> bool:
     """
     Cette fonction renvoie un booléen disant si l'automate en paramètre est complet ou non
@@ -7,24 +8,28 @@ def est_complet(AF: dict) -> bool:
         lignes = f.readlines()
         for ligne in lignes:
             if '-' in ligne:
-                return False 
-        return True # ici le caractère '-' n'a pas été trouvé dans les ligne
+                return False
+
+        # ici le caractère '-' n'a pas été trouvé dans les ligne
+        return True
+
 
 def trouver_manquants(AF: dict) -> list:
     """
-    Cette fonction renvoie une liste de tuples contenant les endroits où il manque une transition pour tous les symboles de l'alphabet dans l'automate.
+    Cette fonction renvoie une liste de tuples contenant les endroits où
+    il manque une transition pour tous les symboles de l'alphabet dans l'automate.
     Chaque tuple contient l'état et le symbole pour lequel il manque une transition.
     """
-    manquants = []  # Liste pour stocker les endroits où il manque une transition
 
-    etats = AF['etats']  # Récupérer les états de l'automate
+    manquants = []
+    etats = AF['etats']
 
-    # Récupérer tous les symboles de l'alphabet
+    # on récupère tous les symboles de l'alphabet
     alphabet = set()
     for transitions_etat in etats.values():
         alphabet.update(transitions_etat.keys())
 
-    # Parcourir tous les états de l'automate et vérifier s'il manque une transition pour chaque symbole de l'alphabet
+    # parcourir tous les états de l'automate et vérifier s'il manque une transition pour chaque symbole de l'alphabet
     for etat, transitions_etat in etats.items():
         for symbole in alphabet:
             if symbole not in transitions_etat:
@@ -32,9 +37,11 @@ def trouver_manquants(AF: dict) -> list:
 
     return manquants
 
+
 def completer_transitions_manquantes(AF: dict) -> dict:
     """
-    Cette fonction complète les transitions manquantes dans l'automate en ajoutant un état poubelle 'P' avec des transitions vers lui-même pour chaque symbole de l'alphabet.
+    Cette fonction complète les transitions manquantes dans l'automate en ajoutant un état poubelle 'P'
+    avec des transitions vers lui-même pour chaque symbole de l'alphabet.
     """
     etats = AF['etats']  # Récupérer les états de l'automate
     alphabet = set()  # Créer un ensemble pour stocker les symboles de l'alphabet
@@ -57,7 +64,3 @@ def completer_transitions_manquantes(AF: dict) -> dict:
         etats[etat][symbole] = ['P']
 
     return AF
-
-
-
-

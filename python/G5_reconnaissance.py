@@ -1,29 +1,30 @@
 
 def est_reconnu(langage: str, automate: dict) -> bool:
     """
-    Vérifie si le langage donné est reconnu par l'automate spécifié.
+    Fonction qui vérifie si le langage donné est reconnu par l'automate spécifié.
     """
-    if not langage:  # Si le langage est vide, vérif si un état initial est également un état terminal
+    if not langage:  # pour le mot vide, vérif si un état initial est également un état terminal
         return any(etat in automate['etats_terminaux'] for etat in automate['etats_initiaux'])
 
-    etats_actuels = automate['etats_initiaux']  # Débutons à partir des états initiaux
-    etats_terminaux = set(automate['etats_terminaux'])  # Ensemble des états terminaux
+    etats_actuels = automate['etats_initiaux']
+    etats_terminaux = set(automate['etats_terminaux'])
 
-    for symbole in langage:
-        etats_suivants = set()  # Ensemble des états suivants après avoir consommé le symbole actuel
+    for lettre in langage:
+        etats_suivants = set()
 
-        # Pour chaque état actuel, on regarde les états suivants après avoir consommé le symbole actuel
+        # Pour chaque état actuel, on regarde les états suivants après avoir consommé la lettre actuelle
         for etat in etats_actuels:
-            transitions_etat = automate['etats'].get(etat, {})  # Transitions possibles pour l'état actuel
-            etats_suivants.update(transitions_etat.get(symbole, []))  # Ajoutons les états suivants pour ce symbole
+            transitions_etat = automate['etats'].get(etat, {})  # transitions possibles pour l'état actuel
+            etats_suivants.update(transitions_etat.get(lettre, []))  # ajoutons les états suivants pour cette lettre
 
-        etats_actuels = etats_suivants  # Mettons à jour les états actuels pour passer à l'étape suivante
+        # on met à jour
+        etats_actuels = etats_suivants
 
-    # Après avoir parcouru tous les symboles du langage, vérifions si nous avons atteint un état terminal
+    # après avoir parcouru tous les symboles du langage, vérifions si nous avons atteint un état terminal
     return bool(etats_actuels & etats_terminaux)
 
 
-def lire_mot():
+def lire_mot() -> str:
     """
     Fonction pour récupérer un mot donné par l'utilisateur au clavier.
     """
@@ -31,7 +32,7 @@ def lire_mot():
     return mot
 
 
-def reconnaitre_mot(mot, automate):
+def reconnaitre_mot(mot: str, automate: dict) -> str:
     """
     Fonction pour reconnaître si un mot donné appartient ou non au langage spécifié par l'automate.
     """
