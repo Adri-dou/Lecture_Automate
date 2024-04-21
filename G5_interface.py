@@ -112,7 +112,7 @@ def lecture_automate(choix: str) -> dict:
         user_input = "0" + user_input
 
     # on ouvre le fichier en lecture
-    with open(f"./automates/G5-{user_input}.txt", "r") as f:
+    with open(f"G5-{user_input}.txt", "r") as f:
         lignes = f.readlines()
 
     # Création du dictionnaire de l'automate
