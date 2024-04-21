@@ -153,7 +153,3 @@ def lecture_automate(choix: str) -> dict:
     #print(nouvel_automate)
 
     return nouvel_automate
-
-
-if __name__ == "__main__":
-    main()
