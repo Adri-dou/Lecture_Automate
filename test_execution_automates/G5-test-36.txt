@@ -1,0 +1,148 @@
+Quel automate souhaitez-vous charger ? (Entrez 'q' pour quitter) 36
+           a | b |
+    E| 0 | 1 |1,2|
+    S| 1 | - |0,2|
+  E S| 2 |0,1| - |
+L'automate n'a pas qu'une unique entrée, il n'est pas déterministe
+
+        Informations :
+Standard : False 
+Deterministe :  False 
+Complet : False 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) s
+test
+L'automate a été standardisé
+           a | b |
+     | 0 | 1 |1,2|
+    S| 1 | - |0,2|
+    S| 2 |0,1| - |
+  E S| i |1,0,1|1,2|
+L'automate n'est pas déterministe, l'état 0 mène vers les états ['1', '2'] depuis la lettre b
+
+        Informations :
+Standard : True 
+Deterministe :  False 
+Complet : False 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) d
+L'automate n'est pas déterministe, l'état 0 mène vers les états ['1', '2'] depuis la lettre b
+
+        Souhaitez-vous déterminiser l'automate ? (o/n) :o
+L'automate a été determinisé
+                 a   |   b   |
+  E S|   i   |  0.1  |  1.2  |
+    S|  0.1  |   1   | 0.1.2 |
+    S|  1.2  |  0.1  |  0.2  |
+    S|   1   |   -   |  0.2  |
+    S| 0.1.2 |  0.1  | 0.1.2 |
+    S|  0.2  |  0.1  |  1.2  |
+
+        Informations :
+Standard : True 
+Deterministe :  True 
+Complet : False 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) c
+Il manque une transition pour l'état 1 et le symbole a
+
+        Voulez vous compléter l'automate ? (o/n) :o
+L'automate a été complété
+                 a   |   b   |
+  E S|   i   |  0.1  |  1.2  |
+    S|  0.1  |   1   | 0.1.2 |
+    S|  1.2  |  0.1  |  0.2  |
+    S|   1   |   P   |  0.2  |
+    S| 0.1.2 |  0.1  | 0.1.2 |
+    S|  0.2  |  0.1  |  1.2  |
+     |   P   |   P   |   P   |
+
+        Informations :
+Standard : True 
+Deterministe :  True 
+Complet : True 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) r
+Entrez un mot (ou 'fin' pour arrêter) : 
+Le mot '' appartient-il au langage de l'automate ? : oui
+Entrez un mot (ou 'fin' pour arrêter) : aba
+Le mot 'aba' appartient-il au langage de l'automate ? : oui
+Entrez un mot (ou 'fin' pour arrêter) : a
+Le mot 'a' appartient-il au langage de l'automate ? : oui
+Entrez un mot (ou 'fin' pour arrêter) : b
+Le mot 'b' appartient-il au langage de l'automate ? : oui
+Entrez un mot (ou 'fin' pour arrêter) : baba
+Le mot 'baba' appartient-il au langage de l'automate ? : oui
+Entrez un mot (ou 'fin' pour arrêter) : aaa
+Le mot 'aaa' appartient-il au langage de l'automate ? : non
+Entrez un mot (ou 'fin' pour arrêter) : fin
+                 a   |   b   |
+  E S|   i   |  0.1  |  1.2  |
+    S|  0.1  |   1   | 0.1.2 |
+    S|  1.2  |  0.1  |  0.2  |
+    S|   1   |   P   |  0.2  |
+    S| 0.1.2 |  0.1  | 0.1.2 |
+    S|  0.2  |  0.1  |  1.2  |
+     |   P   |   P   |   P   |
+
+        Informations :
+Standard : True 
+Deterministe :  True 
+Complet : True 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) k
+
+Automate complémentaire depuis un automate déterministe complet
+                 a   |   b   |
+    E|   i   |  0.1  |  1.2  |
+     |  0.1  |   1   | 0.1.2 |
+     |  1.2  |  0.1  |  0.2  |
+     |   1   |   P   |  0.2  |
+     | 0.1.2 |  0.1  | 0.1.2 |
+     |  0.2  |  0.1  |  1.2  |
+    S|   P   |   P   |   P   |
+
+        Informations :
+Standard : True 
+Deterministe :  True 
+Complet : True 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) r
+Entrez un mot (ou 'fin' pour arrêter) : abab
+Le mot 'abab' appartient-il au langage de l'automate ? : non
+Entrez un mot (ou 'fin' pour arrêter) : 
+Le mot '' appartient-il au langage de l'automate ? : non
+Entrez un mot (ou 'fin' pour arrêter) : aaa
+Le mot 'aaa' appartient-il au langage de l'automate ? : oui
+Entrez un mot (ou 'fin' pour arrêter) : b
+Le mot 'b' appartient-il au langage de l'automate ? : non
+Entrez un mot (ou 'fin' pour arrêter) : a
+Le mot 'a' appartient-il au langage de l'automate ? : non
+Entrez un mot (ou 'fin' pour arrêter) : baba
+Le mot 'baba' appartient-il au langage de l'automate ? : non
+Entrez un mot (ou 'fin' pour arrêter) : fin
+                 a   |   b   |
+    E|   i   |  0.1  |  1.2  |
+     |  0.1  |   1   | 0.1.2 |
+     |  1.2  |  0.1  |  0.2  |
+     |   1   |   P   |  0.2  |
+     | 0.1.2 |  0.1  | 0.1.2 |
+     |  0.2  |  0.1  |  1.2  |
+    S|   P   |   P   |   P   |
+
+        Informations :
+Standard : True 
+Deterministe :  True 
+Complet : True 
+
+
+Que voulez-vous faire ?  (s = standardiser, d = vérifier s'il est déterministe, c = vérifier la complétude, r = reconnaissance de mot, k = complémentarisation q = quitter) q
+Vous pouvez choisir un autre automate...
+
+Quel automate sou
